@@ -1,6 +1,15 @@
 /* TODO: Add a rule for images, so they never exceed their container's width. */
+/* comntianer has width 50% image has max width 100% or min width 100%*/
 
+/*IMAGE STYLES
+=======================================*/
 
+img {
+  max-width: 100%;
+}
+
+/*BODY STYLES
+=======================================*/
 
 body {
   line-height: 1.5;
