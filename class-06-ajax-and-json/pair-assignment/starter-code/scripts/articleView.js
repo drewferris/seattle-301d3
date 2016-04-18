@@ -63,77 +63,48 @@ articleView.setTeasers = function() {
 };
 
 articleView.initNewArticlePage = function() {
-  // TODO: Ensure the main .tab-content area is revealed. We might add more tabs later.
   $('.tab-content').show();
-  // TODO: The new articles we create will be copy/pasted into our source data file.
-  // Set up this "export" functionality. We can hide it for now, and show it once we
-  // have data to export. Also, let's add focus event to help us select the JSON.
   $('#export-field').hide();
-<<<<<<< HEAD
-  $('#article-json').on('focus', function () {
-=======
-  $('#article-json').on('focus', function() {
->>>>>>> 6a4d7693d3002ffafa1d54eca686126d71aafbd3
-    $(this).select();
+  $('#article-json').on('focus', function(){
+    this.select();
   });
-  // TODO: Add an event handler to update the preview and the export field if any inputs change.
-  $('#new-form').on('change', 'input', 'textarea', articleView.create);
+
+  $('#new-form').on('change', 'input, textarea', articleView.create);
 };
 
 articleView.create = function() {
-<<<<<<< HEAD
-  // TODO: Set up a var to hold the new article we are creating.
-  // Clear out the #articles element, so we can put in the updated preview
-  $('#article-preview').empty();
+  var article;
+  $('#articles').empty();
 
-  var formArticle = new Article({
+  // Instantiate an article based on what's in the form fields:
+  article = new Article({
     title: $('#article-title').val(),
     author: $('#article-author').val(),
     authorUrl: $('#article-author-url').val(),
     category: $('#article-category').val(),
     body: $('#article-body').val(),
-    publishedOn: $('#article-published:checked').length ? new Date() : null
-  });
-=======
-  // TODO: Clear out the #articles element, so we can put in the updated preview
-  $('#article-preview').empty();
-
->>>>>>> 6a4d7693d3002ffafa1d54eca686126d71aafbd3
-  // TODO: Instantiate an article based on what's in the form fields:
-  var formArticle = new Article({
-    title: $('#article-title').val(),
-    author: $('#article-author').val(),
-    authorUrl: $('#article-author-url').val(),
-    category: $('#article-category').val(),
-    body: $('#article-body').val(),
-    publishedOn: $('#article-published:checked').length ? new Date() : null
+    publishedOn: $('#article-published:checked').length ? util.today() : null
   });
 
-  // TODO: Use our interface to the Handblebars template to put this new article into the DOM:
-<<<<<<< HEAD
-  $('#article-preview').append(formArticle.toHtml());
-  // TODO: Activate the highlighting of any code blocks:
+  // Use the Handblebars template to put this new article into the DOM:
+  $('#articles').append(article.toHtml());
+
+  // Activate the highlighting of any code blocks:
   $('pre code').each(function(i, block) {
     hljs.highlightBlock(block);
   });
-  // TODO: Export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
+
+  // Export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
   $('#export-field').show();
-  $('#article-json').val(JSON.stringify(formArticle) + ',');
-=======
-    $('#article-preview').append(formArticle.toHtml());
-
-  // TODO: Activate the highlighting of any code blocks:
-    $('pre code').each(function(i, block) {
-      hljs.highlightBlock(block);
-    });
-
-  // TODO: Export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
-    $('#export-field').show();
-    $('#article-json').val(JSON.stringify(formArticle) + ',');
->>>>>>> 6a4d7693d3002ffafa1d54eca686126d71aafbd3
+  $('#article-json').val(JSON.stringify(article) + ',');
 };
 
+
 articleView.initIndexPage = function() {
+  Article.all.forEach(function(a){
+    $('#articles').append(a.toHtml())
+  });
+
   articleView.populateFilters();
   articleView.handleCategoryFilter();
   articleView.handleAuthorFilter();
