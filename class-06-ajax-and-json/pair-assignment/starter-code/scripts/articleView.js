@@ -68,7 +68,7 @@ articleView.initNewArticlePage = function() {
   $('#article-json').on('focus', function(){
     this.select();
   });
-
+// needs to be called somewhre
   $('#new-form').on('change', 'input, textarea', articleView.create);
 };
 
