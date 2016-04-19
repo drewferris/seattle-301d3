@@ -57,7 +57,6 @@ Article.fetchAll = function() {
                     //DONE: What do we pass in here to the .loadAll() method? Be careful
                     // when handling different data types between here and localStorage! you have to parse it localStorage.hackerIpsu
 
-
                     articleView.initIndexPage(); //(); //DONE: Change this fake method call to the correct
                     // one that will render the index page.
                 } else {
@@ -86,10 +85,10 @@ Article.fetchAll = function() {
 Article.jsonfetch = function() {
     $.ajax({
         type: 'GET',
-        url: 'data/hackeripsum.json',
+        url: 'data/data.json',
         success: function(data, message, xhr) {
-            Article.loadAll(data);
-            localStorage.setItem('hackerIpsum', JSON.stringify(data));
+            Project.loadAll(data);
+            localStorage.setItem('projects', JSON.stringify(data));
             articleView.initIndexPage();
             etag = (xhr.getResponseHeader('ETag'));
             localStorage.setItem('etag', etag);
