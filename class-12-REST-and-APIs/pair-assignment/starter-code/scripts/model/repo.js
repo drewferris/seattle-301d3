@@ -11,8 +11,9 @@
         '?per_page=10' +
         '&sort=updated',
       type: 'GET',
-      headers: {'Authorization':'token ' + gitHubToken},
+      headers: {'Authorization':'token ' + githubToken},
       success: function(data){
+        repos.all = data;
         callback(data);
       }
     });
@@ -25,6 +26,7 @@
     return repos.all.filter(function(repo) {
       return repo[attr];
     });
+
   };
 
   module.repos = repos;
