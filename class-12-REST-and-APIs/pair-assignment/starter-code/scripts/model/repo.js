@@ -6,6 +6,17 @@
   repos.requestRepos = function(callback) {
     // TODO: How would you like to fetch your repos? Someone say AJAX!?
     //  Don't forget to call the callback!
+    $.ajax({
+      url: 'https://api.github.com/users/drewferris/repos' +
+        '?per_page=10' +
+        '&sort=updated',
+      type: 'GET',
+      headers: {'Authorization':'token ' + githubToken},
+      success: function(data){
+        repos.all = data;
+        callback(data);
+      }
+    });
 
   };
 
@@ -15,6 +26,7 @@
     return repos.all.filter(function(repo) {
       return repo[attr];
     });
+
   };
 
   module.repos = repos;
