@@ -1,1 +1,2 @@
-githubToken.js
+scripts/model/gitHubToken.js
+.gitignore
